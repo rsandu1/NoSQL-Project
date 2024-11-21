@@ -15,6 +15,7 @@ restaurants_collection = db['Restaurant_Reviews']
 @app.route('/')
 def index():
     first_row = restaurants_collection.find_one()
+    print(first_row)
     return render_template('index.html', title="Home", first_row=first_row)
 
 
