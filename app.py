@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = "your_secret_key"
 
 # MongoDB Configuration
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb+srv://varteagagonzalez:A4kdFOLEN8smbr0D@cluster0.9lkow.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = client['restaurant_db']
 users_collection = db['users']
 restaurants_collection = db['restaurants']
