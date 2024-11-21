@@ -8,9 +8,9 @@ app.secret_key = "your_secret_key"
 
 # MongoDB Configuration
 client = MongoClient("mongodb+srv://varteagagonzalez:A4kdFOLEN8smbr0D@cluster0.9lkow.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-db = client['restaurant_db']
+db = client['Restaurants']
 users_collection = db['users']
-restaurants_collection = db['restaurants']
+restaurants_collection = db['Restaurant_Reviews']
 
 @app.route('/')
 def index():
