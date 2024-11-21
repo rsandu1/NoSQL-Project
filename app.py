@@ -14,7 +14,9 @@ restaurants_collection = db['restaurants']
 
 @app.route('/')
 def index():
-    return render_template('index.html', title="Home")
+    first_row = restaurants_collection.find_one()
+    return render_template('index.html', title="Home", first_row=first_row)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
