@@ -2,8 +2,15 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 
 # MongoDB Configuration
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb+srv://varteagagonzalez:A4kdFOLEN8smbr0D@cluster0.9lkow.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = client['restaurant_db']
+
+# Test connection
+try:
+    client.admin.command('ping')
+    print("MongoDB connection successful!")
+except Exception as e:
+    print("Error connecting to MongoDB:", e)
 
 # Collections
 users_collection = db['users']
