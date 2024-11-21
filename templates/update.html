@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Update Restaurant</h2>
+<form method="POST" action="{{ url_for('update') }}">
+    <label for="record_id">Restaurant ID</label>
+    <input type="text" id="record_id" name="record_id" required>
+    
+    <label for="name">New Name</label>
+    <input type="text" id="name" name="name">
+    
+    <label for="address">New Address</label>
+    <input type="text" id="address" name="address">
+    
+    <label for="rating">New Rating</label>
+    <input type="number" id="rating" name="rating" min="1" max="5" step="0.1">
+    
+    <button type="submit">Update</button>
+</form>
+{% endblock %}

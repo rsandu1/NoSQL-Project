@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Search Restaurants</h2>
+<form method="POST" action="{{ url_for('search') }}">
+    <label for="query">Search by name</label>
+    <input type="text" id="query" name="query" placeholder="Enter restaurant name">
+    <button type="submit">Search</button>
+</form>
+
+{% if results %}
+    <h3>Results:</h3>
+    <ul>
+        {% for result in results %}
+            <li>
+                <strong>{{ result['name'] }}</strong> - {{ result['address'] }} - Rating: {{ result['rating'] }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}
