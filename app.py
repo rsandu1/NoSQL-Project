@@ -76,7 +76,7 @@ def logout():
 @app.route('/dashboard')
 def dashboard():
     if 'username' in session:
-        return render_template('search.html', title="Dashboard")
+        return render_template('dashboard.html', username=session['username'], title="Dashboard")
     flash("Please log in to access the dashboard.")
     return redirect(url_for('login'))
 
