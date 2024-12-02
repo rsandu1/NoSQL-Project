@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash
 from bson.objectid import ObjectId
+import datetime
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
@@ -11,40 +12,58 @@ client = MongoClient("mongodb+srv://varteagagonzalez:A4kdFOLEN8smbr0D@cluster0.9
 db = client['Restaurants']
 users_collection = db['users']
 restaurants_collection = db['Restaurant_Reviews']
+accounts_collection = db['accounts']
 
 @app.route('/')
 def index():
     first_row = restaurants_collection.find_one()
-    print(first_row)
     return render_template('index.html', title="Home", first_row=first_row)
 
 
+# Register Route
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         hashed_password = generate_password_hash(password)
-        
-        if users_collection.find_one({'username': username}):
-            flash("Username already exists.")
+
+        # Check if username already exists
+        if accounts_collection.find_one({'username': username}):
+            flash("Username already exists. Please choose another.")
             return redirect(url_for('register'))
         
-        users_collection.insert_one({'username': username, 'password': hashed_password})
+        # Create a new account in the 'accounts' collection
+        accounts_collection.insert_one({
+            'username': username,
+            'password': hashed_password,
+            'created_at': datetime.datetime.utcnow(),
+            'last_login': None
+        })
         flash("Registration successful! Please log in.")
         return redirect(url_for('login'))
     return render_template('register.html', title="Register")
 
+
+# Login Route
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        user = users_collection.find_one({'username': username})
-        if user and check_password_hash(user['password'], password):
+
+        # Find the account by username
+        account = accounts_collection.find_one({'username': username})
+        if account and check_password_hash(account['password'], password):
+            # Update last login time
+            accounts_collection.update_one(
+                {'_id': account['_id']},
+                {'$set': {'last_login': datetime.datetime.utcnow()}}
+            )
             session['username'] = username
             flash("Logged in successfully!")
             return redirect(url_for('dashboard'))
+        
         flash("Invalid username or password.")
     return render_template('login.html', title="Login")
 
