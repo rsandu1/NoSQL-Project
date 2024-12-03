@@ -14,7 +14,7 @@
         <div class="nav-left">
             <a href="{{ url_for('index') }}">Gulp</a>
             <div class="search-bar">
-                <input type="text" placeholder="Find your next favorite meal">
+                <input type="text" placeholder="  Find your next favorite meal">
                 <button>
                     <img src="https://www.freeiconspng.com/thumbs/magnifying-glass-icon/magnifying-glass-icon-13.png" alt="Search" style="width: 20px; height: 20px;" class="icon">
                 </button>
@@ -25,11 +25,18 @@
                 <span>Welcome, {{ session['username'] }}</span>
                 <a href="{{ url_for('logout') }}">Logout</a>
             {% else %}
-                <a href="{{ url_for('dashboard') }}">Login</a>
+                <a href="{{ url_for('login') }}">Login</a>
                 <a href="{{ url_for('register') }}">Register</a>
-                <button class="menu-button">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" alt="Menu" style="width: 25px; height: 25px;" class="icon">
-                </button>
+                <div class="dropdown">
+                    <button class="menu-button">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" alt="Menu" style="width: 25px; height: 25px;" class="icon">
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">Create Review</a>
+                        <a href="#">Update Review</a>
+                        <a href="#">Delete Reveiw</a>
+                    </div>
+                </div>
             {% endif %}
         </div>
     </nav>
