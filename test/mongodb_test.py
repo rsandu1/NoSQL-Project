@@ -14,9 +14,12 @@ except Exception as e:
 posts = []
 db =  client[('Restaurants')]
 Restaurants_collection = db['Restaurant_Reviews']
-results = Restaurants_collection.find({}, {"Name": 1, "Address":1, "Food":1, "_id": 0}) 
+results = Restaurants_collection.find({}, {"Name": 1, "Rating Count":1, "Food":1, "_id": 0}) 
 for document in results:
     posts.append(document)
+for item in posts:
+    if "Rating Count" in item and isinstance(item["Rating Count"], float):
+        item["Rating Count"] = int(item["Rating Count"])
 
 suggested_restaurants = random.sample(posts, 10)
 print(suggested_restaurants)

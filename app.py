@@ -77,10 +77,13 @@ def logout():
 @app.route('/dashboard')
 def dashboard():
     posts = []
-    results = restaurants_collection.find({}, {"Name": 1, "Address":1, "Food":1, "_id": 0}) 
+    results = restaurants_collection.find({}, {"Name": 1, "Rating":1, "Rating Count":1, "Address":1, "Food":1, "_id": 0}) 
     for document in results:
         posts.append(document)
     suggested_restaurants = random.sample(posts, 18)
+    for item in posts:
+        if "Rating Count" in item and isinstance(item["Rating Count"], float):
+            item["Rating Count"] = int(item["Rating Count"])
     if 'username' in session:
         return render_template('dashboard.html', username=session['username'], title="Dashboard", posts=suggested_restaurants)
     return render_template('dashboard.html', title="Dashboard", posts=suggested_restaurants)
