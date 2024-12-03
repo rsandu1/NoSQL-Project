@@ -10,9 +10,15 @@ except Exception as e:
 
 # first_row = Restaurant_Reviews.find_one()
 # print(first_row)
-
+posts = []
 db =  client[('Restaurants')]
 Restaurants_collection = db['Restaurant_Reviews']
+results = Restaurants_collection.find({}, {"Name": 1, "Address":1, "Food":1, "_id": 0}) 
+for document in results:
+    posts.append(document)
 
-first_row = Restaurants_collection.find_one()
-print(first_row)
+print(type(posts))
+i = 0 
+while i < 2:
+    print(posts[i])
+    i+=1

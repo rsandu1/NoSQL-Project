@@ -75,10 +75,15 @@ def logout():
 
 @app.route('/dashboard')
 def dashboard():
+    posts = [
+        {"author": "John D.", "time": "5 minutes ago", "restaurant_name": "Yi Ji Shi Mo Noodle Corp",
+         "address": "123 Main Street, Cityville", "image": "restaurant1.jpg"},
+        {"author": "Jane S.", "time": "10 minutes ago", "restaurant_name": "Maxi Moving",
+         "address": "456 Elm Street, Townsville", "image": "restaurant2.jpg"},
+    ]
     if 'username' in session:
-        return render_template('dashboard.html', username=session['username'], title="Dashboard")
-    flash("Please log in to access the dashboard.")
-    return redirect(url_for('login'))
+        return render_template('dashboard.html', username=session['username'], title="Dashboard", posts=posts)
+    return render_template('dashboard.html', title="Dashboard", posts=posts)
 
 @app.route('/search', methods=['POST'])
 def search():
