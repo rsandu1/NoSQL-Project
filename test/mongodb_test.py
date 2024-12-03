@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+import random
 
 try:
     # Replace with your actual connection URI
@@ -17,8 +18,5 @@ results = Restaurants_collection.find({}, {"Name": 1, "Address":1, "Food":1, "_i
 for document in results:
     posts.append(document)
 
-print(type(posts))
-i = 0 
-while i < 2:
-    print(posts[i])
-    i+=1
+suggested_restaurants = random.sample(posts, 10)
+print(suggested_restaurants)

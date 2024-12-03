@@ -3,6 +3,7 @@ from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash
 from bson.objectid import ObjectId
 import datetime
+import random
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
@@ -79,9 +80,10 @@ def dashboard():
     results = restaurants_collection.find({}, {"Name": 1, "Address":1, "Food":1, "_id": 0}) 
     for document in results:
         posts.append(document)
+    suggested_restaurants = random.sample(posts, 18)
     if 'username' in session:
-        return render_template('dashboard.html', username=session['username'], title="Dashboard", posts=posts)
-    return render_template('dashboard.html', title="Dashboard", posts=posts)
+        return render_template('dashboard.html', username=session['username'], title="Dashboard", posts=suggested_restaurants)
+    return render_template('dashboard.html', title="Dashboard", posts=suggested_restaurants)
 
 @app.route('/search', methods=['POST'])
 def search():
