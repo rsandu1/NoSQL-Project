@@ -32,9 +32,9 @@
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" alt="Menu" style="width: 25px; height: 25px;" class="icon">
                     </button>
                     <div class="dropdown-content">
-                        <a href="#">Create Review</a>
-                        <a href="#">Update Review</a>
-                        <a href="#">Delete Reveiw</a>
+                        <a href="{{ url_for('insert') }}">Add Restaurant</a>
+                        <a href="{{ url_for('update') }}">Update Info</a>
+                        <a href="{{ url_for('delete') }}">Delete Restaurant</a>
                     </div>
                 </div>
             {% endif %}
