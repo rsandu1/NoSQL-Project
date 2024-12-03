@@ -15,7 +15,9 @@
             <a href="{{ url_for('index') }}">Gulp</a>
             <div class="search-bar">
                 <input type="text" placeholder="Find your next favorite meal">
-                <button>Search</button>
+                <button>
+                    <img src="https://www.freeiconspng.com/thumbs/magnifying-glass-icon/magnifying-glass-icon-13.png" alt="Search" style="width: 20px; height: 20px;" class="icon">
+                </button>
             </div>
         </div>
         <div class="nav-right">
@@ -25,6 +27,9 @@
             {% else %}
                 <a href="{{ url_for('dashboard') }}">Login</a>
                 <a href="{{ url_for('register') }}">Register</a>
+                <button class="menu-button">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" alt="Menu" style="width: 25px; height: 25px;" class="icon">
+                </button>
             {% endif %}
         </div>
     </nav>
