@@ -24,6 +24,16 @@
             {% if session.get('username') %}
                 <span>Welcome, {{ session['username'] }}</span>
                 <a href="{{ url_for('logout') }}">Logout</a>
+                <div class="dropdown">
+                    <button class="menu-button">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png" alt="Menu" style="width: 25px; height: 25px;" class="icon">
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="{{ url_for('insert') }}">Add Restaurant</a>
+                        <a href="{{ url_for('update') }}">Update Info</a>
+                        <a href="{{ url_for('delete') }}">Delete Restaurant</a>
+                    </div>
+                </div>
             {% else %}
                 <a href="{{ url_for('login') }}">Login</a>
                 <a href="{{ url_for('register') }}">Register</a>
