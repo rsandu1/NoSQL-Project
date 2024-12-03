@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Welcome to the Flask MongoDB App</h1>
-<p>This application allows you to manage a restaurant database using MongoDB.</p>
+<!--background="https://res.cloudinary.com/traveltripperweb/image/upload/c_limit,f_auto,h_2500,q_auto,w_2500/v1711386144/vqddvlknujuckt2hhyln.jpg"-->
+<body background="https://res.cloudinary.com/traveltripperweb/image/upload/c_limit,f_auto,h_2500,q_auto,w_2500/v1711386144/vqddvlknujuckt2hhyln.jpg">
+<h1>Welcome to <span class="gulpy">Gulp</span></h1>
+<h2>Your one stop shop for all things NYC-licious.</h2>
+<!--<style>
+    p {
+      background-image: url('https://media.admiddleeast.com/photos/66696ac8dd1866616c1c8580/16:9/w_2560%2Cc_limit/GettyImages-1340760386.jpg');
+    }
+    </style>
+<img src="https://media.admiddleeast.com/photos/66696ac8dd1866616c1c8580/16:9/w_2560%2Cc_limit/GettyImages-1340760386.jpg" alt="Skyline">-->
 
-<h2>First Restaurant in the Database:</h2>
+<!--<h2>First Restaurant in the Database:</h2>
 {% if first_row %}
     <ul>
         <li><strong>Name:</strong> {{ first_row['Name'] }}</li>
@@ -13,16 +21,17 @@
     </ul>
 {% else %}
     <p>No records found in the database.</p>
-{% endif %}
+{% endif %}-->
 
 <div class="actions">
     {% if session.get('username') %}
         <p>Hello, {{ session['username'] }}!</p>
-        <a href="{{ url_for('dashboard') }}" class="btn">Go to Dashboard</a>
-        <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        <a href="{{ url_for('dashboard') }}" class="btn" style="width:80px;height:20px;">Dashboard</a>
+        <!--<a href="{{ url_for('logout') }}" class="btn">Logout</a>-->
     {% else %}
-        <a href="{{ url_for('login') }}" class="btn">Login</a>
-        <a href="{{ url_for('register') }}" class="btn">Register</a>
+        <a href="{{ url_for('dashboard') }}" class="btn" style="width:80px;height:20px;">Dashboard</a>
+        <!--<a href="{{ url_for('register') }}" class="btn">Register</a>-->
     {% endif %}
 </div>
+</body>
 {% endblock %}

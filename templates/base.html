@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title | default("Flask MongoDB App") }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Jaro:opsz@6..72&display=swap');
+    </style>
 </head>
 <body>
     <nav>
         <div class="nav-left">
-            <a href="{{ url_for('index') }}">Home</a>
-            {% if session.get('username') %}
-                <a href="{{ url_for('dashboard') }}">Dashboard</a>
-            {% endif %}
+            <a href="{{ url_for('index') }}">Gulp</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Find your next favorite meal">
+                <button>Search</button>
+            </div>
         </div>
         <div class="nav-right">
             {% if session.get('username') %}
