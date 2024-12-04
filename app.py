@@ -100,8 +100,8 @@ def search():
 def insert():
     if 'username' not in session:
         flash("Please log in to access this feature.")
-        #return redirect(url_for('login'))
-        return render_template('insert.html', title="Insert Record")
+        return redirect(url_for('login'))
+        #return render_template('insert.html', title="Insert Record")
     
     if request.method == 'POST':
         '''name = request.form['name']
@@ -123,7 +123,7 @@ def insert():
         restaurants_collection.insert_one({
             "URL": url,
             "Name": name,
-            "Rating": rating,
+            "Rating": float(rating),
             "Rating Count": 1,
             "Detailed Ratings": "",
             "Price Category": price,
