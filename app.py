@@ -180,6 +180,8 @@ def update():
             current_rating = restaurant.get("Ratings", 0.0)
             current_count = restaurant.get("Rating Count", 0)
             total_score = current_rating * current_count
+            # print(total_score)
+            total_score = int(round(total_score))
             new_total_score = total_score + user_rating
             new_count = current_count + 1
             new_average_rating = new_total_score / new_count
@@ -188,7 +190,7 @@ def update():
             restaurants_collection.update_one(
                 {"_id": restaurant["_id"]},
                 {
-                    "$set": {"Rating": round(new_average_rating, 2)},
+                    "$set": {"Rating": round(new_average_rating, 1)},
                     "$inc": {"Rating Count": 1}
                 }
             )
