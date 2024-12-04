@@ -177,7 +177,7 @@ def update():
             "rating": float(request.form['rating'])
         }'''
         try:
-            current_rating = restaurant.get("Ratings", 0.0)
+            current_rating = restaurant.get("Rating", 0.0)
             current_count = restaurant.get("Rating Count", 0)
             total_score = current_rating * current_count
             # print(total_score)
