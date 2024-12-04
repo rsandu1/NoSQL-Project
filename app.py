@@ -104,10 +104,6 @@ def insert():
         #return render_template('insert.html', title="Insert Record")
     
     if request.method == 'POST':
-        '''name = request.form['name']
-        address = request.form['address']
-        rating = request.form['rating']
-        restaurants_collection.insert_one({"Name": name, "Address": address, "Rating": float(rating)})'''
         name = request.form['name']
         address = request.form['address']
         rating = request.form['rating']
@@ -142,12 +138,20 @@ def delete():
         return render_template('delete.html', title="Delete Record")
     
     if request.method == 'POST':
-        record_id = request.form['record_id']
-        try:
-            restaurants_collection.delete_one({'_id': ObjectId(record_id)})
-            flash("Record deleted successfully!")
-        except Exception as e:
-            flash("Invalid record ID.")
+        name = request.form['name']
+
+        restaurant = restaurants_collection.find_one({"Name": name})
+        if restaurant :
+            try:
+                restaurants_collection.delete_one({"Name": name})
+                flash("Record deleted successfully!")
+            except Exception as e:
+                # flash("Invalid Restaurant Name.")
+                flash("An error occurred while trying to delete the record.")
+                print(f"Error: {e}")
+        else :
+            flash(f"Restaurant '{name}' does not exist.")
+            return redirect(url_for('delete'))
         return redirect(url_for('dashboard'))
     return render_template('delete.html', title="Delete Record")
 
