@@ -164,7 +164,7 @@ def update():
     
     if request.method == 'POST':
         name = request.form['name']
-        rating = float(request.form['rating'])
+        user_rating = float(request.form['rating'])
 
         # find restaurant by name
         restaurant = restaurants_collection.find_one({"Name": name})
