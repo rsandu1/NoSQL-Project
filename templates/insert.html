@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Insert a New Restaurant</h2>
+<body background="https://res.cloudinary.com/traveltripperweb/image/upload/c_limit,f_auto,h_2500,q_auto,w_2500/v1711386144/vqddvlknujuckt2hhyln.jpg">
+<h2>Add a Review</h2>
 <form method="POST" action="{{ url_for('insert') }}">
     <label for="name">Name</label>
     <input type="text" id="name" name="name" required>
@@ -10,8 +11,15 @@
     <input type="text" id="address" name="address" required>
     
     <label for="rating">Rating</label>
-    <input type="number" id="rating" name="rating" min="1" max="5" step="0.1" required>
+    <input type="number" id="rating" name="rating" min="1" max="5" step="0.5" required>
+
+    <label for="price">Price (scale of 1-4)</label>
+    <input type="number" id="price" name="price" min="1" max="4" step="1">
+
+    <label for="url">Website</label>
+    <input type="text" id="url" name="url">
     
     <button type="submit">Insert</button>
 </form>
+</body>
 {% endblock %}

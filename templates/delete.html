@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Delete Restaurant</h2>
+<body background="https://res.cloudinary.com/traveltripperweb/image/upload/c_limit,f_auto,h_2500,q_auto,w_2500/v1711386144/vqddvlknujuckt2hhyln.jpg">
+<h2>Delete Review</h2>
 <form method="POST" action="{{ url_for('delete') }}">
     <label for="record_id">Restaurant ID</label>
     <input type="text" id="record_id" name="record_id" required>
     
     <button type="submit">Delete</button>
 </form>
+</body>
 {% endblock %}

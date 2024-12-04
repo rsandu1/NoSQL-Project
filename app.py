@@ -98,13 +98,36 @@ def search():
 def insert():
     if 'username' not in session:
         flash("Please log in to access this feature.")
-        return redirect(url_for('login'))
+        #return redirect(url_for('login'))
+        return render_template('insert.html', title="Insert Record")
     
     if request.method == 'POST':
+        '''name = request.form['name']
+        address = request.form['address']
+        rating = request.form['rating']
+        restaurants_collection.insert_one({"Name": name, "Address": address, "Rating": float(rating)})'''
         name = request.form['name']
         address = request.form['address']
         rating = request.form['rating']
-        restaurants_collection.insert_one({'name': name, 'address': address, 'rating': float(rating)})
+        price = request.form['price']
+        url = request.form['url']
+
+        # Check if Restaurant already exists
+        if restaurants_collection.find_one({"Name": name}):
+            flash("Restaurant already exists. Please choose another.")
+            return redirect(url_for('insert'))
+        
+        # Create a new restaurant in the 'restaurants' collection
+        restaurants_collection.insert_one({
+            "URL": url,
+            "Name": name,
+            "Rating": rating,
+            "Rating Count": 1,
+            "Detailed Ratings": "",
+            "Price Category": price,
+            "Address": address
+        })
+        
         flash("Record inserted successfully!")
         return redirect(url_for('dashboard'))
     return render_template('insert.html', title="Insert Record")
@@ -113,7 +136,8 @@ def insert():
 def delete():
     if 'username' not in session:
         flash("Please log in to access this feature.")
-        return redirect(url_for('login'))
+        #return redirect(url_for('login'))
+        return render_template('delete.html', title="Delete Record")
     
     if request.method == 'POST':
         record_id = request.form['record_id']
@@ -129,7 +153,8 @@ def delete():
 def update():
     if 'username' not in session:
         flash("Please log in to access this feature.")
-        return redirect(url_for('login'))
+        #return redirect(url_for('login'))
+        return render_template('update.html', title="Update Record")
     
     if request.method == 'POST':
         record_id = request.form['record_id']
