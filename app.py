@@ -134,8 +134,8 @@ def insert():
 def delete():
     if 'username' not in session:
         flash("Please log in to access this feature.")
-        #return redirect(url_for('login'))
-        return render_template('delete.html', title="Delete Record")
+        return redirect(url_for('login'))
+        #return render_template('delete.html', title="Delete Record")
     
     if request.method == 'POST':
         name = request.form['name']
@@ -163,14 +163,36 @@ def update():
         return render_template('update.html', title="Update Record")
     
     if request.method == 'POST':
-        record_id = request.form['record_id']
-        new_data = {
-            "name": request.form['name'],
-            "address": request.form['address'],
+        name = request.form['name']
+        rating = float(request.form['rating'])
+
+        # find restaurant by name
+        restaurant = restaurants_collection.find_one({"Name": name})
+        if not restaurant:
+            flash("Restaurant not found.")
+            return redirect(url_for('update'))
+
+        '''new_data = {
+            # "address": request.form['address'],
             "rating": float(request.form['rating'])
-        }
+        }'''
         try:
-            restaurants_collection.update_one({'_id': ObjectId(record_id)}, {'$set': new_data})
+            current_rating = restaurant.get("Ratings", 0.0)
+            current_count = restaurant.get("Rating Count", 0)
+            total_score = current_rating * current_count
+            new_total_score = total_score + user_rating
+            new_count = current_count + 1
+            new_average_rating = new_total_score / new_count
+
+            # Update the database
+            restaurants_collection.update_one(
+                {"_id": restaurant["_id"]},
+                {
+                    "$set": {"Rating": round(new_average_rating, 2)},
+                    "$inc": {"Rating Count": 1}
+                }
+            )
+            # restaurants_collection.update_one({'_id': ObjectId(record_id)}, {'$set': new_data})
             flash("Record updated successfully!")
         except Exception as e:
             flash("Invalid record ID.")

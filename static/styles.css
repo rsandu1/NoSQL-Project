@@ -68,24 +68,34 @@ form {
     max-width: 500px;
     margin: auto;
     padding: 2em;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    background-color: #20232a;
+    border: 1px solid #000000;
+    color: white;
+    border-radius: 10px;
 }
 
 form label {
-    display: block;
+    display: flex;
     margin-top: 1em;
 }
 
-form input, form button {
+form input{
+    width: 485px;
+    padding: 0.5em;
+    margin-top: 8px;
+    border-radius: 15px;
+    border: none;
+}
+
+form button{
     width: 100%;
     padding: 0.5em;
-    margin-top: 0.5em;
+    margin-top: 30px;
+    border-radius: 15px;
 }
 
 form button {
-    background-color: #0074d9;
+    background-color: #38a4ed;
     color: white;
     border: none;
     cursor: pointer;
@@ -94,6 +104,11 @@ form button {
 form button:hover {
     background-color: #0056b3;
 }
+
+/*.aed {
+    background-color: #0b1936;
+    color: white;
+}*/
 
 ul {
     list-style-type: none;
