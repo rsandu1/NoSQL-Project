@@ -92,9 +92,34 @@ def dashboard():
 
 @app.route('/search', methods=['POST'])
 def search():
-    query = request.form['query']
+    '''query = request.form['query']
     results = restaurants_collection.find({"name": {"$regex": query, "$options": "i"}})
-    return render_template('search.html', title="Search Results", results=results)
+    # return render_template('search.html', title="Search Results", results=results)
+    return redirect(url_for('search'))
+    return render_template('search.html', title="Search Results", results=results)'''
+    if 'username' not in session:
+        flash("Please log in to access this feature.")
+        # return redirect(url_for('login'))
+        return render_template('search.html', title="Search Page", results=[])
+    
+    results = []
+    query = None
+
+    if request.method == 'POST':
+        query = request.form.get('query', '')
+
+        if query:
+            # Perform a case-insensitive search in the MongoDB collection
+            results = restaurants_collection.find({"Name": {"$regex": query, "$options": "i"}})
+
+        # results = restaurants_collection.find({"name": {"$regex": query, "$options": "i"}})
+        '''for document in results :
+            posts.append(document)
+        for item in posts:
+        if "Rating Count" in item and isinstance(item["Rating Count"], float):
+            item["Rating Count"] = int(item["Rating Count"])'''
+        # return render_template('search.html', title="Search Results", results=results)
+    return render_template('search.html', title="Search Page", results=[])
 
 @app.route('/insert', methods=['GET', 'POST'])
 def insert():
