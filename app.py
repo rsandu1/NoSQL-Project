@@ -90,6 +90,21 @@ def dashboard():
         return render_template('dashboard.html', username=session['username'], title="Dashboard", posts=suggested_restaurants)
     return render_template('dashboard.html', title="Dashboard", posts=suggested_restaurants)
 
+@app.route('/<category_text>')
+def category_page(category_text):
+    posts = []
+    specific_food = category_text
+    results = restaurants_collection.find({"Food": specific_food})
+    for document in results:
+        posts.append(document)
+    # suggested_restaurants = random.sample(posts, 18)
+    for item in posts:
+        if "Rating Count" in item and isinstance(item["Rating Count"], float):
+            item["Rating Count"] = int(item["Rating Count"])
+    if 'username' in session:
+        return render_template('categories.html', username=session['username'], title="category_text", posts=posts)
+    return render_template('categories.html', title=specific_food, posts=posts)
+
 @app.route('/search', methods=['GET', 'POST'])
 def search():
 
