@@ -12,7 +12,7 @@
 <body>
     <nav>
         <div class="nav-left">
-            <a href="{{ url_for('index') }}">Gulp</a>
+            <a href="{{ url_for('index') }}" class="logo">Gulp</a>
             <div class="search-bar">
                 <form action="{{ url_for('search') }}" method="GET" class="search-bar">
                     <input type="text" name="query" placeholder="  Find your next favorite meal" class="special-input">
@@ -20,19 +20,6 @@
                         <img src="https://www.freeiconspng.com/thumbs/magnifying-glass-icon/magnifying-glass-icon-13.png" alt="Search" style="width: 20px; height: 20px;">
                     </button>
                 </form>
-                <!--<a href="{{ url_for('search') }}">
-                    <img src="https://www.freeiconspng.com/thumbs/magnifying-glass-icon/magnifying-glass-icon-13.png" alt="Search" style="width: 20px; height: 20px;" class="icon">
-                </a>-->
-                <!--<input type="text" placeholder="  Find your next favorite meal">
-                <button onclick="navigateTo('/search')">
-                     <img src="https://www.freeiconspng.com/thumbs/magnifying-glass-icon/magnifying-glass-icon-13.png" alt="Search" style="width: 20px; height: 20px;" class="icon">
-                </button>-->
-                <!--<form method="POST" action="{{ url_for('search') }}">
-                    <input type="text" placeholder="  Find your next favorite meal">
-                    <button type="submit">
-                        <img src="https://www.freeiconspng.com/thumbs/magnifying-glass-icon/magnifying-glass-icon-13.png" alt="Search" style="width: 20px; height: 20px;" class="icon">
-                    </button>
-                </form>-->
             </div>
         </div>
         <div class="nav-right">

@@ -82,7 +82,7 @@ def dashboard():
     results = restaurants_collection.find({}, {"Name": 1, "Rating":1, "Rating Count":1, "Address":1, "Food":1, "image":1, "_id": 0}) 
     for document in results:
         posts.append(document)
-    suggested_restaurants = random.sample(posts, 18)
+    suggested_restaurants = random.sample(posts, 9)
     for item in posts:
         if "Rating Count" in item and isinstance(item["Rating Count"], float):
             item["Rating Count"] = int(item["Rating Count"])
@@ -112,36 +112,17 @@ def search():
     
     query = request.args.get('query', '').strip()
     results = restaurants_collection.find({"Name": {"$regex": query, "$options": "i"}})
-    '''query = request.form['query']
-    results = restaurants_collection.find({"name": {"$regex": query, "$options": "i"}})
-    # return render_template('search.html', title="Search Results", results=results)
-    return redirect(url_for('search'))
-    return render_template('search.html', title="Search Results", results=results)'''
+    
     if 'username' not in session:
         flash("Please log in to access this feature.")
-        # return redirect(url_for('login'))
-        return render_template('search.html', title="Search Page", posts=results)
+        return redirect(url_for('login'))
+        # return render_template('search.html', title="Search Page", posts=results)
     
 
     if request.method == 'POST':
-        # query = request.form.get('query', '')
         query = request.args.get('query', '').strip()
+        results = restaurants_collection.find({"Name": {"$regex": query, "$options": "i"}})
 
-        if query:
-            # Perform a case-insensitive search in MongoDB
-            results = list(restaurants_collection.find({"Name": {"$regex": query, "$options": "i"}}))
-
-        '''if query:
-            # Perform a case-insensitive search in the MongoDB collection
-            results = restaurants_collection.find({"Name": {"$regex": query, "$options": "i"}})'''
-
-        # results = restaurants_collection.find({"name": {"$regex": query, "$options": "i"}})
-        '''for document in results :
-            posts.append(document)
-        for item in posts:
-        if "Rating Count" in item and isinstance(item["Rating Count"], float):
-            item["Rating Count"] = int(item["Rating Count"])'''
-        # return render_template('search.html', title="Search Results", results=results)
     return render_template('search.html', title="Search Page", posts=results)
 
 @app.route('/insert', methods=['GET', 'POST'])

@@ -24,12 +24,14 @@ nav {
     font-size: 30px;
     display: flex;
     align-items: center;
+    margin-top: -45px;
 }
 
 nav a {
     color: white;
     text-decoration: none;
     margin-right: 20px;
+
 }
 
 /* nav a:hover {
@@ -145,17 +147,22 @@ ul li {
     display: flex;            /* Make the search bar's input and button appear next to each other */
     background-color: transparent;
     border: none;
+    margin: none;
+    margin-left: -15px;
+    /* margin-top: -20px; */
 }
 
 /*.search-bar input*/
 
 .special-input {
     padding: 5px;
+    padding-left: 10px;
     margin-right: 10px;       /* Space between the input and the button */
     width: 400px;
     border-radius: 25px;
     border: none;
     margin-top: 0px;
+    height: 30px;
 }
 
 .search-bar button {
@@ -166,6 +173,7 @@ ul li {
     border: none;              /* Remove the border */
     outline: none;
     cursor: pointer;
+    width: 5px;
 }
 
 .search-bar button:hover {
@@ -174,13 +182,14 @@ ul li {
 
 .icon {
     filter: invert(1);
+    margin-top: -0px;
 }
 
 .menu-button {
-    display: inline-flex;
+    display: flex;
     background-color: transparent;
     border: none;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .dropdown {
@@ -220,14 +229,6 @@ ul li {
     text-align: center;
 }
 
-.nav-search {
-    display: inline flex;
-    background-color: transparent;
-    margin-top: 0px;
-}
-
-nav
-
-.nav-search button:hover {
-    background-color: transparent;
+.logo {
+    margin-top: -10px;
 }
