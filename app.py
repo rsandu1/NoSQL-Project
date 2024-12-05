@@ -90,8 +90,11 @@ def dashboard():
         return render_template('dashboard.html', username=session['username'], title="Dashboard", posts=suggested_restaurants)
     return render_template('dashboard.html', title="Dashboard", posts=suggested_restaurants)
 
-@app.route('/search', methods=['POST'])
+@app.route('/search', methods=['GET', 'POST'])
 def search():
+
+    results = []
+    query = None
     '''query = request.form['query']
     results = restaurants_collection.find({"name": {"$regex": query, "$options": "i"}})
     # return render_template('search.html', title="Search Results", results=results)
@@ -100,17 +103,15 @@ def search():
     if 'username' not in session:
         flash("Please log in to access this feature.")
         # return redirect(url_for('login'))
-        return render_template('search.html', title="Search Page", results=[])
+        return render_template('search.html', title="Search Page", posts=results)
     
-    results = []
-    query = None
 
     if request.method == 'POST':
         query = request.form.get('query', '')
 
-        if query:
+        '''if query:
             # Perform a case-insensitive search in the MongoDB collection
-            results = restaurants_collection.find({"Name": {"$regex": query, "$options": "i"}})
+            results = restaurants_collection.find({"Name": {"$regex": query, "$options": "i"}})'''
 
         # results = restaurants_collection.find({"name": {"$regex": query, "$options": "i"}})
         '''for document in results :
@@ -119,7 +120,7 @@ def search():
         if "Rating Count" in item and isinstance(item["Rating Count"], float):
             item["Rating Count"] = int(item["Rating Count"])'''
         # return render_template('search.html', title="Search Results", results=results)
-    return render_template('search.html', title="Search Page", results=[])
+    return render_template('search.html', title="Search Page", posts=results)
 
 @app.route('/insert', methods=['GET', 'POST'])
 def insert():
