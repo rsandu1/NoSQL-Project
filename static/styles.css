@@ -26,6 +26,16 @@ nav {
     align-items: center;
     margin-top: -45px;
 }
+.nav-right {
+    display: flex;
+    align-items: center;
+    margin-top: -50px;
+    
+}
+
+.nav-right span {
+    margin-right: 20px;
+}
 
 nav a {
     color: white;
@@ -189,7 +199,7 @@ ul li {
     display: flex;
     background-color: transparent;
     border: none;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
 .dropdown {

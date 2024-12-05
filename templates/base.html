@@ -24,7 +24,7 @@
         </div>
         <div class="nav-right">
             {% if session.get('username') %}
-                <span>Welcome, {{ session['username'] }}</span>
+                <span>Welcome, {{ session['username'] }} </span>
                 <a href="{{ url_for('logout') }}">Logout</a>
                 <div class="dropdown">
                     <button class="menu-button">
