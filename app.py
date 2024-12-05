@@ -159,8 +159,8 @@ def delete():
 def update():
     if 'username' not in session:
         flash("Please log in to access this feature.")
-        #return redirect(url_for('login'))
-        return render_template('update.html', title="Update Record")
+        return redirect(url_for('login'))
+        #return render_template('update.html', title="Update Record")
     
     if request.method == 'POST':
         name = request.form['name']
