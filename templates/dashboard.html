@@ -110,6 +110,12 @@
       color: #000;
     }
   </style>
+  <script>
+    // JavaScript function to redirect
+    function navigateTo(route) {
+        window.location.href = route; // Redirects to the specified route
+    }
+</script>
 </head>
 <body>
   <!-- Page Title -->
@@ -208,35 +214,35 @@
     <div id="categories-section">
         <h1>Cusines</h1>
         <div class="categories">
-            <div class="category-button">
+            <div class="category-button" onclick="navigateTo('/register')">
               <div class="category-icon">🇺🇸</div>
-                <div class="category-text">American</div>
+              <div class="category-text">American</div>
             </div>
-            <div class="category-button">
-              <div class="category-icon">🇮🇹</div>
+            <div class="category-button" onclick="navigateTo('/register')">
+              <div class="category-icon">🇮🇹 </div>
                 <div class="category-text">Italian</div>
             </div>
-            <div class="category-button">
+            <div class="category-button" onclick="navigateTo('/register')">
               <div class="category-icon">🇨🇳</div>
                 <div class="category-text">Chinese</div>
             </div>
-            <div class="category-button">
+            <div class="category-button" onclick="navigateTo('/register')">
                 <div class="category-icon">🇮🇳</div>
                 <div class="category-text">Indian</div>
             </div>
-            <div class="category-button">
+            <div class="category-button" onclick="navigateTo('/register')">
               <div class="category-icon">🇪🇸</div>
                 <div class="category-text">Spanish</div>
             </div>
-            <div class="category-button">
+            <div class="category-button" onclick="navigateTo('/register')">
               <div class="category-icon">🇬🇷</div>
                 <div class="category-text">Mediterranean</div>
             </div>
-            <div class="category-button">
+            <div class="category-button" onclick="navigateTo('/register')">
                 <div class="category-icon">🇯🇲</div>
                 <div class="category-text">Caribbean</div>
             </div>
-            <div class="category-button">
+            <div class="category-button" onclick="navigateTo('/register')">
                 <div class="category-icon">•••</div>
                 <div class="category-text">More</div>
             </div>
