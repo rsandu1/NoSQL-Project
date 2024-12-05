@@ -108,8 +108,10 @@ def category_page(category_text):
 @app.route('/search', methods=['GET', 'POST'])
 def search():
 
-    results = []
-    query = None
+    posts = []
+    
+    query = request.args.get('query', '').strip()
+    results = restaurants_collection.find({"Name": {"$regex": query, "$options": "i"}})
     '''query = request.form['query']
     results = restaurants_collection.find({"name": {"$regex": query, "$options": "i"}})
     # return render_template('search.html', title="Search Results", results=results)
@@ -140,7 +142,7 @@ def search():
         if "Rating Count" in item and isinstance(item["Rating Count"], float):
             item["Rating Count"] = int(item["Rating Count"])'''
         # return render_template('search.html', title="Search Results", results=results)
-    return render_template('search.html', title="Search Page", results=results)
+    return render_template('search.html', title="Search Page", posts=results)
 
 @app.route('/insert', methods=['GET', 'POST'])
 def insert():
