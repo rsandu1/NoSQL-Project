@@ -210,7 +210,7 @@
       async function sendCategoryAndReload(categoryText) {
           try {
               // Redirect with the selected category as a URL parameter
-              window.location.href = `/category/${categoryText}`;
+              window.location.href = `${categoryText}`;
           } catch (error) {
               console.error('Error sending category text:', error);
           }
@@ -221,39 +221,39 @@
 
     <!-- Scoped section for the categories -->
     <div id="categories-section">
-        <h1>Cusines</h1>
+        <h1>Popular Cusines</h1>
         <div class="categories">
-            <div class="category-button" onclick="sendCategoryAndReload('America')">
+            <div class="category-button" onclick="sendCategoryAndReload('American')">
               <div class="category-icon">🇺🇸</div>
               <div class="category-text">American</div>
             </div>
-            <div class="category-button" onclick="navigateTo('/register')">
+            <div class="category-button" onclick="sendCategoryAndReload('Italian')">
               <div class="category-icon">🇮🇹 </div>
                 <div class="category-text">Italian</div>
             </div>
-            <div class="category-button" onclick="navigateTo('/register')">
+            <div class="category-button" onclick="sendCategoryAndReload('Chinese')">
               <div class="category-icon">🇨🇳</div>
                 <div class="category-text">Chinese</div>
             </div>
-            <div class="category-button" onclick="navigateTo('/register')">
+            <div class="category-button" onclick="sendCategoryAndReload('Indian')">
                 <div class="category-icon">🇮🇳</div>
                 <div class="category-text">Indian</div>
             </div>
-            <div class="category-button" onclick="navigateTo('/register')">
+            <div class="category-button" onclick="sendCategoryAndReload('Spanish')">
               <div class="category-icon">🇪🇸</div>
                 <div class="category-text">Spanish</div>
             </div>
-            <div class="category-button" onclick="navigateTo('/register')">
+            <div class="category-button" onclick="sendCategoryAndReload('Mediterranean')">
               <div class="category-icon">🇬🇷</div>
                 <div class="category-text">Mediterranean</div>
             </div>
-            <div class="category-button" onclick="navigateTo('/register')">
+            <div class="category-button" onclick="sendCategoryAndReload('Caribbean')">
                 <div class="category-icon">🇯🇲</div>
                 <div class="category-text">Caribbean</div>
             </div>
-            <div class="category-button" onclick="navigateTo('/register')">
-                <div class="category-icon">•••</div>
-                <div class="category-text">More</div>
+            <div class="category-button" onclick="sendCategoryAndReload('Mexican')">
+                <div class="category-icon">🇲🇽</div>
+                <div class="category-text">Mexican</div>
             </div>
         </div>
     </div>
