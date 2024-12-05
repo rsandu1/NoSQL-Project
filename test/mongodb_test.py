@@ -15,21 +15,23 @@ except Exception as e:
 
 
 posts = {
-    "American": ["American1.jpg", "American2.jpg", "American3.jpeg", "American4.jpg", "American5.jpeg"],
-    "Italian": ["Italian1.jpeg", "Italian2.jpeg", "Italian3.jpg", "Italian4.jpeg", "Italian5.jpeg"],
-    "Spanish": ["Spanish1.jpeg", "Spanish2.jpg", "Spanish3.jpg"],
-    "Indian": ["Indian1.jpg", "Indian2.jpg", "Indian3.jpg"],
-    "Latin": ["Latin1.jpg", "Latin2.jpg", "Latin3.jpg", "Latin4.jpeg", "Latin5.jpeg"],
-    "Mexican": ["Mexican1.jpeg", "Mexican2.jpeg", "Mexican3.jpg"],
-    "Caribbean": ["Caribbean1.jpg", "Caribbean2.jpg", "Caribbean3.jpg"],
-    "Mediterranean": ["M1.jpg", "M2.jpg", "M3.jpeg"],
-    "Eastern European": ["EE1.jpeg", "EE2.jpg", "EE3.jpg"],
-    "Korean": ["K1.jpg", "K2.jpg"],
-    "Chinese": ["CH1.jpg", "CH2.jpg", "CH3.jpg"],
-    "Japanese": ["J1.jpg", "J2.jpeg", "J3.jpg"],
-    "Middle Eastern": ["ME1.jpg", "ME2.jpg", "ME3.jpg"],
-    "South Asian": ["SA1.jpg", "SA2.jpg", "SA3.jpg"],
-    "French": ["F1.png", "F2.jpg", "F3.jpg"]
+    "American": ["static/images/American1.jpg", "static/images/American2.jpg", "static/images/American3.jpeg", "static/images/American4.jpg", "static/images/American5.jpeg"],
+    "Italian": ["static/images/Italian1.jpeg", "static/images/Italian2.jpeg", "static/images/Italian3.jpg", "static/images/Italian4.jpeg", "static/images/Italian5.jpeg"],
+    "Spanish": ["static/images/Spanish1.jpeg", "static/images/Spanish2.jpg", "static/images/Spanish3.jpg"],
+    "Indian": ["static/images/Indian1.jpg", "static/images/Indian2.jpg", "static/images/Indian3.jpg"],
+    "Latin": ["static/images/Latin1.jpg", "static/images/Latin2.jpg", "static/images/Latin3.jpg", "static/images/Latin4.jpeg", "static/images/Latin5.jpeg"],
+    "Mexican": ["static/images/Mexican1.jpeg", "static/images/Mexican2.jpeg", "static/images/Mexican3.jpg"],
+    "Caribbean": ["static/images/Caribbean1.jpg", "static/images/Caribbean2.jpg", "static/images/Caribbean3.jpg"],
+    "Mediterranean": ["static/images/M1.jpg", "static/images/M2.jpg", "static/images/M3.jpeg"],
+    "Eastern European": ["static/images/EE1.jpeg", "static/images/EE2.jpg", "static/images/EE3.jpg"],
+    "Korean": ["static/images/K1.jpg", "static/images/K2.jpg"],
+    "Chinese": ["static/images/CH1.jpg", "static/images/CH2.jpg", "static/images/CH3.jpg"],
+    "Japanese": ["static/images/J1.jpg", "static/images/J2.jpeg", "static/images/J3.jpg"],
+    "Middle Eastern": ["static/images/ME1.jpg", "static/images/ME2.jpg", "static/images/ME3.jpg"],
+    "East Asian": ["static/images/SA1.jpg", "static/images/SA2.jpg", "static/images/SA3.jpg"],
+    "South Asian": ["static/images/SA1.jpg", "static/images/SA2.jpg", "static/images/SA3.jpg"],
+    "French": ["static/images/F1.png", "static/images/F2.jpg", "static/images/F3.jpg"],
+    "English":["static/images/E1.jpg", "static/images/E2.jpg"]
 }
 
 # images = {American:[]}
@@ -45,20 +47,36 @@ posts = {
 # Retrieve all restaurant names
 db =  client[('Restaurants')]
 Restaurants_collection = db['Restaurant_Reviews']
-restaurant_names = Restaurants_collection.find({}, {"Name": 1, "_id": 0})
-cuisine_names= Restaurants_collection.find({}, {"Food": 1, "_id": 0})
+# Query all documents to retrieve restaurants and cuisines
+documents = Restaurants_collection.find({}, {"Name": 1, "Food": 1})  # Retrieve only the 'name' and 'cuisine' fields
 
-# Extract the names into a Python list
-names_list = [restaurant["Name"] for restaurant in restaurant_names if "Name" in restaurant]
-cuisine_list = [restaurant["Food"] for restaurant in cuisine_names if "Food" in restaurant]
+# Update each document with a random image
+i=0
+for doc in documents:
+    
+    restaurant_name = doc.get("Name")  # Restaurant name
+    cuisine_type = doc.get("Food")  # Cuisine type
+    
+    # Skip if the cuisine is not in the posts dictionary
+    if cuisine_type not in posts:
+        print(f"Skipped {restaurant_name}: Cuisine '{cuisine_type}' not found in posts. ", i)
+        continue
 
-for restaurant, cuisine in zip(names_list, cuisine_list):
-    image = random.choice(posts[cuisine])    
+    # Select a random image for the cuisine
+    image = random.choice(posts[cuisine_type])
+    
+    # Update the document with the random image
     result = Restaurants_collection.update_one(
-        {"name": restaurant},  # Find the document by restaurant name
+        {"_id": doc["_id"]},  # Match by document ID
         {"$set": {"image": image}}  # Add or update the "image" field
     )
-    if result.matched_count == 0:
-        print(f"No document found for restaurant: {restaurant}")
-    elif result.modified_count == 1:
-        print(f"Updated document for restaurant: {restaurant}")
+    
+    if result.modified_count == 1:
+        print(f"Updated {restaurant_name} with image: {image} ",  i)
+    else:
+        print(f"No changes made to {restaurant_name}. ", i)
+    
+    i+=1
+    
+
+print("Script completed.")

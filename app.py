@@ -79,7 +79,7 @@ def logout():
 @app.route('/dashboard')
 def dashboard():
     posts = []
-    results = restaurants_collection.find({}, {"Name": 1, "Rating":1, "Rating Count":1, "Address":1, "Food":1, "_id": 0}) 
+    results = restaurants_collection.find({}, {"Name": 1, "Rating":1, "Rating Count":1, "Address":1, "Food":1, "image":1, "_id": 0}) 
     for document in results:
         posts.append(document)
     suggested_restaurants = random.sample(posts, 18)

@@ -122,19 +122,14 @@
     <div class="post-card">
       <!-- Post Header -->
       <div class="post-header">
-        <img src="{{ post.user_avatar_url }}" alt="User Avatar">
-        <div class="author-info">
-          <span class="author-name">{{ post.author }}</span>
-          <span>{{ post.time }}</span>
-        </div>
+        <h5>{{ post.Name }}</h5>
       </div>
 
       <!-- Post Image -->
-      <img src="{{ post.image_url }}" alt="Restaurant Image" class="post-image">
+      <img src="{{post.image}}" alt="Restaurant Image" class="post-image">
 
       <!-- Post Content -->
       <div class="post-content">
-        <h2>{{ post.Name }}</h2>
         <p>{{ post.Address }}</p>
       </div>
 
