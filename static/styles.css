@@ -143,14 +143,19 @@ ul li {
 
 .search-bar {
     display: flex;            /* Make the search bar's input and button appear next to each other */
+    background-color: transparent;
+    border: none;
 }
 
-.search-bar input {
+/*.search-bar input*/
+
+.special-input {
     padding: 5px;
     margin-right: 10px;       /* Space between the input and the button */
-    width: 200px;
+    width: 400px;
     border-radius: 25px;
     border: none;
+    margin-top: 0px;
 }
 
 .search-bar button {
@@ -161,6 +166,10 @@ ul li {
     border: none;              /* Remove the border */
     outline: none;
     cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: transparent;
 }
 
 .icon {
@@ -206,3 +215,19 @@ ul li {
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
 /*background-color: #0074d9;*/
+
+.new-user {
+    text-align: center;
+}
+
+.nav-search {
+    display: inline flex;
+    background-color: transparent;
+    margin-top: 0px;
+}
+
+nav
+
+.nav-search button:hover {
+    background-color: transparent;
+}

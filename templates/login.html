@@ -11,6 +11,12 @@
     <input type="password" id="password" name="password" required>
     
     <button type="submit">Login</button>
+
+    <div class="new-user">
+        <p>New user? Create a new account!</p>
+        <a href="{{ url_for('register') }}" class="btn" style="width:80px;height:20px;">Create Account</a>
+    </div>
+
 </form>
 </body>
 {% endblock %}

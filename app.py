@@ -107,7 +107,12 @@ def search():
     
 
     if request.method == 'POST':
-        query = request.form.get('query', '')
+        # query = request.form.get('query', '')
+        query = request.args.get('query', '').strip()
+
+        if query:
+            # Perform a case-insensitive search in MongoDB
+            results = list(restaurants_collection.find({"Name": {"$regex": query, "$options": "i"}}))
 
         '''if query:
             # Perform a case-insensitive search in the MongoDB collection
@@ -120,7 +125,7 @@ def search():
         if "Rating Count" in item and isinstance(item["Rating Count"], float):
             item["Rating Count"] = int(item["Rating Count"])'''
         # return render_template('search.html', title="Search Results", results=results)
-    return render_template('search.html', title="Search Page", posts=results)
+    return render_template('search.html', title="Search Page", results=results)
 
 @app.route('/insert', methods=['GET', 'POST'])
 def insert():
